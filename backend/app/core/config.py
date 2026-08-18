@@ -3,6 +3,7 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
 import os
+from typing import List
 
 
 class Settings(BaseSettings):
@@ -55,13 +56,13 @@ class Settings(BaseSettings):
     )
 
     # CORS
-    cors_origins: list[str] = [
+    cors_origins: List[str] = [
         "http://localhost:5173",
         "http://localhost:3000",
     ]
     cors_allow_credentials: bool = True
-    cors_allow_methods: list[str] = ["*"]
-    cors_allow_headers: list[str] = ["*"]
+    cors_allow_methods: List[str] = ["*"]
+    cors_allow_headers: List[str] = ["*"]
 
     # Lab Configuration
     lab_mode: bool = os.getenv("LAB_MODE", "true").lower() == "true"

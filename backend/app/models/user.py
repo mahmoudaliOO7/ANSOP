@@ -36,16 +36,6 @@ class User(Base, UUIDMixin, TimestampMixin):
         secondary="user_roles",
         back_populates="users",
     )
-    audit_logs: Mapped[list["AuditLog"]] = relationship(
-        "AuditLog",
-        back_populates="actor",
-        foreign_keys="AuditLog.actor_id",
-    )
-    approval_decisions: Mapped[list["ApprovalDecision"]] = relationship(
-        "ApprovalDecision",
-        back_populates="approver",
-        foreign_keys="ApprovalDecision.approver_id",
-    )
 
     def __repr__(self) -> str:
         return f"<User(id={self.id}, username={self.username}, email={self.email})>"
