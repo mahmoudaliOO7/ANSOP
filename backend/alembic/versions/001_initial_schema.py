@@ -8,7 +8,6 @@ Create Date: 2025-08-18 13:00:00.000000
 from alembic import op
 import sqlalchemy as sa
 from sqlalchemy.dialects import postgresql
-import uuid
 
 revision = "001"
 down_revision = None
@@ -19,12 +18,6 @@ depends_on = None
 def upgrade() -> None:
     """Create initial database schema."""
     # Create ENUM types
-    sa.event.listen(
-        sa.create_engine("postgresql://").dialect,
-        "connect",
-        lambda dbapi_conn, connection_record: None,
-    )
-    
     op.execute("CREATE TYPE role_type AS ENUM ('ADMIN', 'SOC_ANALYST', 'APPROVER', 'VIEWER')")
     op.execute("CREATE TYPE severity_type AS ENUM ('CRITICAL', 'HIGH', 'MEDIUM', 'LOW', 'INFO')")
     op.execute("CREATE TYPE detection_status_type AS ENUM ('NEW', 'ACKNOWLEDGED', 'RESOLVED', 'CLOSED')")

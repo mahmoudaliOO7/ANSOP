@@ -21,7 +21,7 @@ def upgrade() -> None:
     op.create_table(
         'allowlist_entries',
         sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False, server_default=sa.text('gen_random_uuid()'), primary_key=True),
-        sa.Column('entry_type', sa.String(50), nullable=False),  # 'ip', 'domain', etc.
+        sa.Column('entry_type', sa.String(50), nullable=False),
         sa.Column('value', sa.String(255), nullable=False),
         sa.Column('description', sa.Text(), nullable=True),
         sa.Column('created_by_id', postgresql.UUID(as_uuid=True), nullable=False),
@@ -36,7 +36,7 @@ def upgrade() -> None:
     op.create_table(
         'denylist_entries',
         sa.Column('id', postgresql.UUID(as_uuid=True), nullable=False, server_default=sa.text('gen_random_uuid()'), primary_key=True),
-        sa.Column('entry_type', sa.String(50), nullable=False),  # 'ip', 'domain', etc.
+        sa.Column('entry_type', sa.String(50), nullable=False),
         sa.Column('value', sa.String(255), nullable=False),
         sa.Column('reason', sa.Text(), nullable=True),
         sa.Column('expiry_date', sa.DateTime(timezone=True), nullable=True),
